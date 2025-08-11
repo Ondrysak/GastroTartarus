@@ -13,6 +13,30 @@ export type HTTPValidationError = {
   detail?: Array<ValidationError>
 }
 
+export type IngredientCreate = {
+  name: string
+  category?: string | null
+  unit?: string
+}
+
+export type IngredientPublic = {
+  name: string
+  category?: string | null
+  unit?: string
+  id: string
+}
+
+export type IngredientsPublic = {
+  data: Array<IngredientPublic>
+  count: number
+}
+
+export type IngredientUpdate = {
+  name?: string | null
+  category?: string | null
+  unit?: string | null
+}
+
 export type ItemCreate = {
   title: string
   description?: string | null
@@ -51,6 +75,102 @@ export type PrivateUserCreate = {
   is_verified?: boolean
 }
 
+export type RecipeCreate = {
+  name: string
+  description?: string | null
+  instructions?: string | null
+  prep_time_minutes?: number | null
+  cook_time_minutes?: number | null
+  servings?: number | null
+  difficulty?: string | null
+  cuisine?: string | null
+}
+
+export type RecipeIngredientCreate = {
+  amount: number | string
+  notes?: string | null
+  recipe_id: string
+  ingredient_id: string
+}
+
+export type RecipeIngredientPublic = {
+  amount: string
+  notes?: string | null
+  id: string
+  recipe_id: string
+  ingredient_id: string
+  ingredient?: IngredientPublic | null
+}
+
+export type RecipeIngredientsPublic = {
+  data: Array<RecipeIngredientPublic>
+  count: number
+}
+
+export type RecipeIngredientUpdate = {
+  amount?: number | string | null
+  notes?: string | null
+  recipe_id?: string | null
+  ingredient_id?: string | null
+}
+
+export type RecipePublic = {
+  name: string
+  description?: string | null
+  instructions?: string | null
+  prep_time_minutes?: number | null
+  cook_time_minutes?: number | null
+  servings?: number | null
+  difficulty?: string | null
+  cuisine?: string | null
+  id: string
+  owner_id: string
+}
+
+export type RecipesPublic = {
+  data: Array<RecipePublic>
+  count: number
+}
+
+export type RecipeSuggestion = {
+  recipe: RecipeWithIngredients
+  match_score: number
+  available_ingredients?: Array<RecipeIngredientPublic>
+  missing_ingredients?: Array<RecipeIngredientPublic>
+  total_ingredients: number
+  available_count: number
+}
+
+export type RecipeSuggestionsPublic = {
+  data: Array<RecipeSuggestion>
+  count: number
+}
+
+export type RecipeUpdate = {
+  name?: string | null
+  description?: string | null
+  instructions?: string | null
+  prep_time_minutes?: number | null
+  cook_time_minutes?: number | null
+  servings?: number | null
+  difficulty?: string | null
+  cuisine?: string | null
+}
+
+export type RecipeWithIngredients = {
+  name: string
+  description?: string | null
+  instructions?: string | null
+  prep_time_minutes?: number | null
+  cook_time_minutes?: number | null
+  servings?: number | null
+  difficulty?: string | null
+  cuisine?: string | null
+  id: string
+  owner_id: string
+  recipe_ingredients?: Array<RecipeIngredientPublic>
+}
+
 export type Token = {
   access_token: string
   token_type?: string
@@ -67,6 +187,35 @@ export type UserCreate = {
   is_superuser?: boolean
   full_name?: string | null
   password: string
+}
+
+export type UserIngredientCreate = {
+  amount: number | string
+  expiration_date?: string | null
+  notes?: string | null
+  ingredient_id: string
+}
+
+export type UserIngredientPublic = {
+  amount: string
+  expiration_date?: string | null
+  notes?: string | null
+  id: string
+  user_id: string
+  ingredient_id: string
+  ingredient?: IngredientPublic | null
+}
+
+export type UserIngredientsPublic = {
+  data: Array<UserIngredientPublic>
+  count: number
+}
+
+export type UserIngredientUpdate = {
+  amount?: number | string | null
+  expiration_date?: string | null
+  notes?: string | null
+  ingredient_id?: string | null
 }
 
 export type UserPublic = {
@@ -106,6 +255,39 @@ export type ValidationError = {
   msg: string
   type: string
 }
+
+export type IngredientsReadIngredientsData = {
+  limit?: number
+  search?: string | null
+  skip?: number
+}
+
+export type IngredientsReadIngredientsResponse = IngredientsPublic
+
+export type IngredientsCreateIngredientData = {
+  requestBody: IngredientCreate
+}
+
+export type IngredientsCreateIngredientResponse = IngredientPublic
+
+export type IngredientsReadIngredientData = {
+  id: string
+}
+
+export type IngredientsReadIngredientResponse = IngredientPublic
+
+export type IngredientsUpdateIngredientData = {
+  id: string
+  requestBody: IngredientUpdate
+}
+
+export type IngredientsUpdateIngredientResponse = IngredientPublic
+
+export type IngredientsDeleteIngredientData = {
+  id: string
+}
+
+export type IngredientsDeleteIngredientResponse = Message
 
 export type ItemsReadItemsData = {
   limit?: number
@@ -170,6 +352,120 @@ export type PrivateCreateUserData = {
 }
 
 export type PrivateCreateUserResponse = UserPublic
+
+export type RecipeIngredientsReadRecipeIngredientsData = {
+  limit?: number
+  /**
+   * Recipe ID to get ingredients for
+   */
+  recipeId: string
+  skip?: number
+}
+
+export type RecipeIngredientsReadRecipeIngredientsResponse =
+  RecipeIngredientsPublic
+
+export type RecipeIngredientsCreateRecipeIngredientData = {
+  requestBody: RecipeIngredientCreate
+}
+
+export type RecipeIngredientsCreateRecipeIngredientResponse =
+  RecipeIngredientPublic
+
+export type RecipeIngredientsReadRecipeIngredientData = {
+  id: string
+}
+
+export type RecipeIngredientsReadRecipeIngredientResponse =
+  RecipeIngredientPublic
+
+export type RecipeIngredientsUpdateRecipeIngredientData = {
+  id: string
+  requestBody: RecipeIngredientUpdate
+}
+
+export type RecipeIngredientsUpdateRecipeIngredientResponse =
+  RecipeIngredientPublic
+
+export type RecipeIngredientsDeleteRecipeIngredientData = {
+  id: string
+}
+
+export type RecipeIngredientsDeleteRecipeIngredientResponse = Message
+
+export type RecipesReadRecipesData = {
+  limit?: number
+  search?: string | null
+  skip?: number
+}
+
+export type RecipesReadRecipesResponse = RecipesPublic
+
+export type RecipesCreateRecipeData = {
+  requestBody: RecipeCreate
+}
+
+export type RecipesCreateRecipeResponse = RecipePublic
+
+export type RecipesGetRecipeSuggestionsData = {
+  limit?: number
+  minMatchScore?: number
+}
+
+export type RecipesGetRecipeSuggestionsResponse = RecipeSuggestionsPublic
+
+export type RecipesReadRecipeData = {
+  id: string
+}
+
+export type RecipesReadRecipeResponse = RecipePublic
+
+export type RecipesUpdateRecipeData = {
+  id: string
+  requestBody: RecipeUpdate
+}
+
+export type RecipesUpdateRecipeResponse = RecipePublic
+
+export type RecipesDeleteRecipeData = {
+  id: string
+}
+
+export type RecipesDeleteRecipeResponse = Message
+
+export type UserIngredientsReadUserIngredientsData = {
+  daysAhead?: number
+  expiringSoon?: boolean
+  limit?: number
+  skip?: number
+}
+
+export type UserIngredientsReadUserIngredientsResponse = UserIngredientsPublic
+
+export type UserIngredientsCreateUserIngredientData = {
+  requestBody: UserIngredientCreate
+}
+
+export type UserIngredientsCreateUserIngredientResponse = UserIngredientPublic
+
+export type UserIngredientsReadUserIngredientData = {
+  id: string
+}
+
+export type UserIngredientsReadUserIngredientResponse = UserIngredientPublic
+
+export type UserIngredientsUpdateUserIngredientData = {
+  id: string
+  requestBody: UserIngredientUpdate
+}
+
+export type UserIngredientsUpdateUserIngredientResponse = UserIngredientPublic
+
+export type UserIngredientsDeleteUserIngredientData = {
+  id: string
+}
+
+export type UserIngredientsDeleteUserIngredientResponse = Message
 
 export type UsersReadUsersData = {
   limit?: number

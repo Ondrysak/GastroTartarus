@@ -4,49 +4,214 @@ import type { CancelablePromise } from "./core/CancelablePromise"
 import { OpenAPI } from "./core/OpenAPI"
 import { request as __request } from "./core/request"
 import type {
-  ItemsReadItemsData,
-  ItemsReadItemsResponse,
+  IngredientsCreateIngredientData,
+  IngredientsCreateIngredientResponse,
+  IngredientsDeleteIngredientData,
+  IngredientsDeleteIngredientResponse,
+  IngredientsReadIngredientData,
+  IngredientsReadIngredientResponse,
+  IngredientsReadIngredientsData,
+  IngredientsReadIngredientsResponse,
+  IngredientsUpdateIngredientData,
+  IngredientsUpdateIngredientResponse,
   ItemsCreateItemData,
   ItemsCreateItemResponse,
-  ItemsReadItemData,
-  ItemsReadItemResponse,
-  ItemsUpdateItemData,
-  ItemsUpdateItemResponse,
   ItemsDeleteItemData,
   ItemsDeleteItemResponse,
+  ItemsReadItemData,
+  ItemsReadItemResponse,
+  ItemsReadItemsData,
+  ItemsReadItemsResponse,
+  ItemsUpdateItemData,
+  ItemsUpdateItemResponse,
   LoginLoginAccessTokenData,
   LoginLoginAccessTokenResponse,
-  LoginTestTokenResponse,
   LoginRecoverPasswordData,
+  LoginRecoverPasswordHtmlContentData,
+  LoginRecoverPasswordHtmlContentResponse,
   LoginRecoverPasswordResponse,
   LoginResetPasswordData,
   LoginResetPasswordResponse,
-  LoginRecoverPasswordHtmlContentData,
-  LoginRecoverPasswordHtmlContentResponse,
+  LoginTestTokenResponse,
   PrivateCreateUserData,
   PrivateCreateUserResponse,
-  UsersReadUsersData,
-  UsersReadUsersResponse,
+  RecipeIngredientsCreateRecipeIngredientData,
+  RecipeIngredientsCreateRecipeIngredientResponse,
+  RecipeIngredientsDeleteRecipeIngredientData,
+  RecipeIngredientsDeleteRecipeIngredientResponse,
+  RecipeIngredientsReadRecipeIngredientData,
+  RecipeIngredientsReadRecipeIngredientResponse,
+  RecipeIngredientsReadRecipeIngredientsData,
+  RecipeIngredientsReadRecipeIngredientsResponse,
+  RecipeIngredientsUpdateRecipeIngredientData,
+  RecipeIngredientsUpdateRecipeIngredientResponse,
+  RecipesCreateRecipeData,
+  RecipesCreateRecipeResponse,
+  RecipesDeleteRecipeData,
+  RecipesDeleteRecipeResponse,
+  RecipesGetRecipeSuggestionsData,
+  RecipesGetRecipeSuggestionsResponse,
+  RecipesReadRecipeData,
+  RecipesReadRecipeResponse,
+  RecipesReadRecipesData,
+  RecipesReadRecipesResponse,
+  RecipesUpdateRecipeData,
+  RecipesUpdateRecipeResponse,
+  UserIngredientsCreateUserIngredientData,
+  UserIngredientsCreateUserIngredientResponse,
+  UserIngredientsDeleteUserIngredientData,
+  UserIngredientsDeleteUserIngredientResponse,
+  UserIngredientsReadUserIngredientData,
+  UserIngredientsReadUserIngredientResponse,
+  UserIngredientsReadUserIngredientsData,
+  UserIngredientsReadUserIngredientsResponse,
+  UserIngredientsUpdateUserIngredientData,
+  UserIngredientsUpdateUserIngredientResponse,
   UsersCreateUserData,
   UsersCreateUserResponse,
-  UsersReadUserMeResponse,
+  UsersDeleteUserData,
   UsersDeleteUserMeResponse,
-  UsersUpdateUserMeData,
-  UsersUpdateUserMeResponse,
-  UsersUpdatePasswordMeData,
-  UsersUpdatePasswordMeResponse,
-  UsersRegisterUserData,
-  UsersRegisterUserResponse,
+  UsersDeleteUserResponse,
   UsersReadUserByIdData,
   UsersReadUserByIdResponse,
+  UsersReadUserMeResponse,
+  UsersReadUsersData,
+  UsersReadUsersResponse,
+  UsersRegisterUserData,
+  UsersRegisterUserResponse,
+  UsersUpdatePasswordMeData,
+  UsersUpdatePasswordMeResponse,
   UsersUpdateUserData,
+  UsersUpdateUserMeData,
+  UsersUpdateUserMeResponse,
   UsersUpdateUserResponse,
-  UsersDeleteUserData,
-  UsersDeleteUserResponse,
+  UtilsHealthCheckResponse,
   UtilsTestEmailData,
   UtilsTestEmailResponse,
-  UtilsHealthCheckResponse,
 } from "./types.gen"
+
+export class IngredientsService {
+  /**
+   * Read Ingredients
+   * Retrieve ingredients.
+   * @param data The data for the request.
+   * @param data.skip
+   * @param data.limit
+   * @param data.search
+   * @returns IngredientsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readIngredients(
+    data: IngredientsReadIngredientsData = {},
+  ): CancelablePromise<IngredientsReadIngredientsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/ingredients/",
+      query: {
+        skip: data.skip,
+        limit: data.limit,
+        search: data.search,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create Ingredient
+   * Create new ingredient.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns IngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static createIngredient(
+    data: IngredientsCreateIngredientData,
+  ): CancelablePromise<IngredientsCreateIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/ingredients/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read Ingredient
+   * Get ingredient by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns IngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static readIngredient(
+    data: IngredientsReadIngredientData,
+  ): CancelablePromise<IngredientsReadIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update Ingredient
+   * Update an ingredient.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns IngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateIngredient(
+    data: IngredientsUpdateIngredientData,
+  ): CancelablePromise<IngredientsUpdateIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Ingredient
+   * Delete an ingredient.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteIngredient(
+    data: IngredientsDeleteIngredientData,
+  ): CancelablePromise<IngredientsDeleteIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
 
 export class ItemsService {
   /**
@@ -291,6 +456,402 @@ export class PrivateService {
       url: "/api/v1/private/users/",
       body: data.requestBody,
       mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
+
+export class RecipeIngredientsService {
+  /**
+   * Read Recipe Ingredients
+   * Retrieve recipe ingredients for a specific recipe.
+   * @param data The data for the request.
+   * @param data.recipeId Recipe ID to get ingredients for
+   * @param data.skip
+   * @param data.limit
+   * @returns RecipeIngredientsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readRecipeIngredients(
+    data: RecipeIngredientsReadRecipeIngredientsData,
+  ): CancelablePromise<RecipeIngredientsReadRecipeIngredientsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/recipe-ingredients/",
+      query: {
+        recipe_id: data.recipeId,
+        skip: data.skip,
+        limit: data.limit,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create Recipe Ingredient
+   * Create new recipe ingredient.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns RecipeIngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static createRecipeIngredient(
+    data: RecipeIngredientsCreateRecipeIngredientData,
+  ): CancelablePromise<RecipeIngredientsCreateRecipeIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/recipe-ingredients/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read Recipe Ingredient
+   * Get recipe ingredient by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns RecipeIngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static readRecipeIngredient(
+    data: RecipeIngredientsReadRecipeIngredientData,
+  ): CancelablePromise<RecipeIngredientsReadRecipeIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/recipe-ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update Recipe Ingredient
+   * Update a recipe ingredient.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns RecipeIngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateRecipeIngredient(
+    data: RecipeIngredientsUpdateRecipeIngredientData,
+  ): CancelablePromise<RecipeIngredientsUpdateRecipeIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/recipe-ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Recipe Ingredient
+   * Delete a recipe ingredient.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteRecipeIngredient(
+    data: RecipeIngredientsDeleteRecipeIngredientData,
+  ): CancelablePromise<RecipeIngredientsDeleteRecipeIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/recipe-ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
+
+export class RecipesService {
+  /**
+   * Read Recipes
+   * Retrieve recipes for the current user.
+   * @param data The data for the request.
+   * @param data.skip
+   * @param data.limit
+   * @param data.search
+   * @returns RecipesPublic Successful Response
+   * @throws ApiError
+   */
+  public static readRecipes(
+    data: RecipesReadRecipesData = {},
+  ): CancelablePromise<RecipesReadRecipesResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/recipes/",
+      query: {
+        skip: data.skip,
+        limit: data.limit,
+        search: data.search,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create Recipe
+   * Create new recipe.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns RecipePublic Successful Response
+   * @throws ApiError
+   */
+  public static createRecipe(
+    data: RecipesCreateRecipeData,
+  ): CancelablePromise<RecipesCreateRecipeResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/recipes/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Get Recipe Suggestions
+   * Get recipe suggestions based on available ingredients.
+   * @param data The data for the request.
+   * @param data.limit
+   * @param data.minMatchScore
+   * @returns RecipeSuggestionsPublic Successful Response
+   * @throws ApiError
+   */
+  public static getRecipeSuggestions(
+    data: RecipesGetRecipeSuggestionsData = {},
+  ): CancelablePromise<RecipesGetRecipeSuggestionsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/recipes/suggestions",
+      query: {
+        limit: data.limit,
+        min_match_score: data.minMatchScore,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read Recipe
+   * Get recipe by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns RecipePublic Successful Response
+   * @throws ApiError
+   */
+  public static readRecipe(
+    data: RecipesReadRecipeData,
+  ): CancelablePromise<RecipesReadRecipeResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/recipes/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update Recipe
+   * Update a recipe.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns RecipePublic Successful Response
+   * @throws ApiError
+   */
+  public static updateRecipe(
+    data: RecipesUpdateRecipeData,
+  ): CancelablePromise<RecipesUpdateRecipeResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/recipes/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete Recipe
+   * Delete a recipe.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteRecipe(
+    data: RecipesDeleteRecipeData,
+  ): CancelablePromise<RecipesDeleteRecipeResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/recipes/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+}
+
+export class UserIngredientsService {
+  /**
+   * Read User Ingredients
+   * Retrieve user ingredients.
+   * @param data The data for the request.
+   * @param data.skip
+   * @param data.limit
+   * @param data.expiringSoon
+   * @param data.daysAhead
+   * @returns UserIngredientsPublic Successful Response
+   * @throws ApiError
+   */
+  public static readUserIngredients(
+    data: UserIngredientsReadUserIngredientsData = {},
+  ): CancelablePromise<UserIngredientsReadUserIngredientsResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/user-ingredients/",
+      query: {
+        skip: data.skip,
+        limit: data.limit,
+        expiring_soon: data.expiringSoon,
+        days_ahead: data.daysAhead,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Create User Ingredient
+   * Create new user ingredient.
+   * @param data The data for the request.
+   * @param data.requestBody
+   * @returns UserIngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static createUserIngredient(
+    data: UserIngredientsCreateUserIngredientData,
+  ): CancelablePromise<UserIngredientsCreateUserIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "POST",
+      url: "/api/v1/user-ingredients/",
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Read User Ingredient
+   * Get user ingredient by ID.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns UserIngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static readUserIngredient(
+    data: UserIngredientsReadUserIngredientData,
+  ): CancelablePromise<UserIngredientsReadUserIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "GET",
+      url: "/api/v1/user-ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Update User Ingredient
+   * Update a user ingredient.
+   * @param data The data for the request.
+   * @param data.id
+   * @param data.requestBody
+   * @returns UserIngredientPublic Successful Response
+   * @throws ApiError
+   */
+  public static updateUserIngredient(
+    data: UserIngredientsUpdateUserIngredientData,
+  ): CancelablePromise<UserIngredientsUpdateUserIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "PUT",
+      url: "/api/v1/user-ingredients/{id}",
+      path: {
+        id: data.id,
+      },
+      body: data.requestBody,
+      mediaType: "application/json",
+      errors: {
+        422: "Validation Error",
+      },
+    })
+  }
+
+  /**
+   * Delete User Ingredient
+   * Delete a user ingredient.
+   * @param data The data for the request.
+   * @param data.id
+   * @returns Message Successful Response
+   * @throws ApiError
+   */
+  public static deleteUserIngredient(
+    data: UserIngredientsDeleteUserIngredientData,
+  ): CancelablePromise<UserIngredientsDeleteUserIngredientResponse> {
+    return __request(OpenAPI, {
+      method: "DELETE",
+      url: "/api/v1/user-ingredients/{id}",
+      path: {
+        id: data.id,
+      },
       errors: {
         422: "Validation Error",
       },

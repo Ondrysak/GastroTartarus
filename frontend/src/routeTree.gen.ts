@@ -17,9 +17,14 @@ import { Route as RecoverPasswordImport } from './routes/recover-password'
 import { Route as LoginImport } from './routes/login'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutSuggestionsImport } from './routes/_layout/suggestions'
 import { Route as LayoutSettingsImport } from './routes/_layout/settings'
+import { Route as LayoutRecipesImport } from './routes/_layout/recipes'
+import { Route as LayoutPantryImport } from './routes/_layout/pantry'
 import { Route as LayoutItemsImport } from './routes/_layout/items'
+import { Route as LayoutIngredientsImport } from './routes/_layout/ingredients'
 import { Route as LayoutAdminImport } from './routes/_layout/admin'
+import { Route as LayoutRecipesIdImport } from './routes/_layout/recipes.$id'
 
 // Create/Update Routes
 
@@ -53,8 +58,23 @@ const LayoutIndexRoute = LayoutIndexImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutSuggestionsRoute = LayoutSuggestionsImport.update({
+  path: '/suggestions',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 const LayoutSettingsRoute = LayoutSettingsImport.update({
   path: '/settings',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutRecipesRoute = LayoutRecipesImport.update({
+  path: '/recipes',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutPantryRoute = LayoutPantryImport.update({
+  path: '/pantry',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -63,9 +83,19 @@ const LayoutItemsRoute = LayoutItemsImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const LayoutIngredientsRoute = LayoutIngredientsImport.update({
+  path: '/ingredients',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
 const LayoutAdminRoute = LayoutAdminImport.update({
   path: '/admin',
   getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutRecipesIdRoute = LayoutRecipesIdImport.update({
+  path: '/$id',
+  getParentRoute: () => LayoutRecipesRoute,
 } as any)
 
 // Populate the FileRoutesByPath interface
@@ -96,17 +126,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutAdminImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/ingredients': {
+      preLoaderRoute: typeof LayoutIngredientsImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/items': {
       preLoaderRoute: typeof LayoutItemsImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/pantry': {
+      preLoaderRoute: typeof LayoutPantryImport
+      parentRoute: typeof LayoutImport
+    }
+    '/_layout/recipes': {
+      preLoaderRoute: typeof LayoutRecipesImport
       parentRoute: typeof LayoutImport
     }
     '/_layout/settings': {
       preLoaderRoute: typeof LayoutSettingsImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/suggestions': {
+      preLoaderRoute: typeof LayoutSuggestionsImport
+      parentRoute: typeof LayoutImport
+    }
     '/_layout/': {
       preLoaderRoute: typeof LayoutIndexImport
       parentRoute: typeof LayoutImport
+    }
+    '/_layout/recipes/$id': {
+      preLoaderRoute: typeof LayoutRecipesIdImport
+      parentRoute: typeof LayoutRecipesImport
     }
   }
 }
@@ -116,8 +166,12 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren([
   LayoutRoute.addChildren([
     LayoutAdminRoute,
+    LayoutIngredientsRoute,
     LayoutItemsRoute,
+    LayoutPantryRoute,
+    LayoutRecipesRoute.addChildren([LayoutRecipesIdRoute]),
     LayoutSettingsRoute,
+    LayoutSuggestionsRoute,
     LayoutIndexRoute,
   ]),
   LoginRoute,
